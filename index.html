@@ -9,9 +9,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600;700&family=Outfit:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
-    rel="stylesheet"
-  />
+    href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet" />
 
   <link rel="stylesheet" href="index.css" />
 </head>
@@ -28,87 +27,73 @@
 
 
   <!-- ════════════════════════════════════════════
-       NAVIGATION HEADER
-       Links: Home, About Us, Know More
+       NAVIGATION
   ════════════════════════════════════════════ -->
-  <header class="navbar" id="navbar">
-    <div class="navbar-container">
+  <nav class="navbar" id="navbar">
 
-      <!-- Logo -->
-      <a href="#" class="nav-logo" aria-label="BizFlow Home">
-        <div class="logo-icon-wrap">
-          <svg class="logo-svg" viewBox="0 0 36 36" fill="none">
-            <rect x="3" y="20" width="7" height="13" rx="2.5" fill="#00897B" />
-            <rect x="14" y="13" width="7" height="20" rx="2.5" fill="#00B09B" />
-            <rect x="25" y="6" width="7" height="27" rx="2.5" fill="#00C4AD" />
-            <polyline points="6.5,18 17.5,11 28.5,4" stroke="#00897B" stroke-width="2.2" stroke-linecap="round" fill="none" />
-            <circle cx="28.5" cy="4" r="2.5" fill="#00C4AD" />
-          </svg>
-        </div>
-        <span class="logo-text">
-          <span class="logo-biz">Biz</span><span class="logo-flow">Flow</span>
-        </span>
-      </a>
-
-      <!-- Navigation links -->
-      <nav aria-label="Primary navigation">
-        <ul class="nav-links" id="nav-links" role="list">
-          <li><a href="#home" class="nav-item active">Home</a></li>
-          <li><a href="#about" class="nav-item">About Us</a></li>
-          <li><a href="#know-more" class="nav-item">Know More</a></li>
-        </ul>
-      </nav>
-
-      <!-- Right Action: Clean pill login link -->
-      <div class="nav-actions">
-        <a href="login.html" class="nav-btn-login">Login</a>
+    <!-- Logo -->
+    <a href="#" class="nav-logo" aria-label="BizFlow Home">
+      <div class="logo-icon-wrap">
+        <svg class="logo-svg" viewBox="0 0 36 36" fill="none">
+          <rect x="3" y="20" width="7" height="13" rx="2.5" fill="#00897B" />
+          <rect x="14" y="13" width="7" height="20" rx="2.5" fill="#00B09B" />
+          <rect x="25" y="6" width="7" height="27" rx="2.5" fill="#00C4AD" />
+          <polyline points="6.5,18 17.5,11 28.5,4" stroke="#00897B" stroke-width="2.2" stroke-linecap="round"
+            fill="none" />
+          <circle cx="28.5" cy="4" r="2.5" fill="#00C4AD" />
+        </svg>
       </div>
+      <span class="logo-text">
+        <span class="logo-biz">Biz</span><span class="logo-flow">Flow</span>
+      </span>
+    </a>
 
-      <!-- Mobile hamburger toggle -->
-      <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
+    <!-- Centre links -->
+    <ul class="nav-links" id="nav-links" role="list">
+      <li><a href="#hero" class="nav-item active">Home</a></li>
+      <li><a href="#features" class="nav-item">Features</a></li>
+      <li><a href="#about" class="nav-item">About</a></li>
+      <li><a href="#contact" class="nav-item">Contact</a></li>
+    </ul>
 
+    <!-- Right actions -->
+    <div class="nav-actions">
+      <a href="login.html" class="btn-nav-login">Login</a>
+      <a href="login.html" class="btn-nav-started">Get Started</a>
     </div>
-  </header>
+
+    <!-- Mobile toggle -->
+    <button class="hamburger" id="hamburger" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
 
 
   <!-- ════════════════════════════════════════════
-       HERO LANDING PAGE
-       1. BizFlow heading (stable, no hover popping)
-       2. Hero baby boss & table cutout
-       3. Tagline (Continuous typing effect)
-       4. "Get Started" CTA Button
+       HERO SECTION
+       1. BIZ FLOW wordmark
+       2. hero_image1.png (centred, background-less, lower size)
+       3. Tagline
   ════════════════════════════════════════════ -->
-  <main class="hero-page" id="home">
+  <section class="hero" id="hero">
 
-    <!-- 1. Heading: BizFlow ──────────────────────── -->
+    <!-- 1. Wordmark ─────────────────────────── -->
     <div class="wordmark-block">
-      <h1 class="wordmark" aria-label="BizFlow">
-        <span class="wm-biz">Biz</span><span class="wm-flow">Flow</span>
+      <h1 class="wordmark">
+        <span class="wm-biz">BIZ</span><span class="wm-dot"> </span><span class="wm-flow">FLOW</span>
       </h1>
-      <div class="wordmark-subtext" aria-hidden="true">
-        <span class="wm-accent-line"></span>
-        <span class="wm-accent-dot"></span>
-        <span class="wm-accent-line"></span>
-      </div>
     </div>
 
-    <!-- 2. Hero Image: Baby Boss & Table Cutout ─── -->
+    <!-- 2. Hero Image (Clean transparent baby boss + table) ──── -->
     <div class="hero-image-frame">
       <div class="hero-image-shadow" aria-hidden="true"></div>
-      <img
-        src="hero_image1.png"
-        alt="BizFlow Executive Baby Boss Character"
-        class="hero-img"
-        draggable="false"
-      />
+      <img src="hero_image1.png" alt="BizFlow Baby Boss character" class="hero-img" draggable="false" />
     </div>
 
-    <!-- 3. Tagline (Continuous Typing Effect) ───── -->
+    <!-- 3. Tagline ──────────────────────────── -->
     <div class="tagline-block">
-      <p class="tagline" aria-label="One flow. One view. Better decisions.">
-        <span class="tagline-typing" id="tagline-typing"></span><span class="typing-cursor" aria-hidden="true">|</span>
+      <p class="tagline">
+        ONE FLOW.&emsp;ONE VIEW.&emsp;BETTER DECISIONS.
       </p>
       <!-- Decorative divider lines flanking tagline -->
       <div class="tagline-ornament" aria-hidden="true">
@@ -118,19 +103,7 @@
       </div>
     </div>
 
-    <!-- 4. CTA Button (Calm, stable hover) ───────── -->
-    <div class="cta-block">
-      <a href="login.html" class="btn-hero-cta" id="btn-get-started">
-        <span class="cta-text">Get Started</span>
-        <span class="cta-arrow-circle" aria-hidden="true">
-          <svg class="cta-arrow-svg" viewBox="0 0 20 20" fill="none">
-            <path d="M4.5 10h11m0 0l-4-4m4 4l-4 4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </span>
-      </a>
-    </div>
-
-  </main>
+  </section>
 
 
   <script src="app.js"></script>
