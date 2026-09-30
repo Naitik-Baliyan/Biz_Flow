@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BizFlow — Sign In / Create Account</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600;700&family=Outfit:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="login.css" />
+</head>
+
+<body>
+
+  <!-- Decorative background canvas -->
+  <div class="bg-canvas" aria-hidden="true">
+    <div class="bg-orb bg-orb-top"></div>
+    <div class="bg-orb bg-orb-right"></div>
+    <div class="bg-orb bg-orb-bottom"></div>
+    <div class="bg-grain"></div>
+  </div>
+
+  <div class="auth-layout">
+
+    <!-- Top Navigation Bar -->
+    <header class="auth-header">
+      <a href="index.html" class="btn-back">
+        <svg viewBox="0 0 20 20" fill="none" class="back-icon">
+          <path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>Back to Home</span>
+      </a>
+
+      <a href="index.html" class="auth-logo" aria-label="BizFlow Home">
+        <div class="logo-icon-wrap">
+          <svg class="logo-svg" viewBox="0 0 36 36" fill="none">
+            <rect x="3" y="20" width="7" height="13" rx="2.5" fill="#00897B" />
+            <rect x="14" y="13" width="7" height="20" rx="2.5" fill="#00B09B" />
+            <rect x="25" y="6" width="7" height="27" rx="2.5" fill="#00C4AD" />
+            <polyline points="6.5,18 17.5,11 28.5,4" stroke="#00897B" stroke-width="2.2" stroke-linecap="round" fill="none" />
+            <circle cx="28.5" cy="4" r="2.5" fill="#00C4AD" />
+          </svg>
+        </div>
+        <span class="logo-text">
+          <span class="logo-biz">Biz</span><span class="logo-flow">Flow</span>
+        </span>
+      </a>
+
+      <div class="auth-header-dummy"></div>
+    </header>
+
+    <!-- Main Auth Area: Boss Character Leaning on Login Card -->
+    <main class="auth-main">
+      <div class="auth-composition">
+
+        <!-- 3D Boss Character (Left Hand / Folded Arm Resting On Card) -->
+        <div class="boss-character-wrapper" aria-hidden="true">
+          <div class="boss-ground-shadow"></div>
+          <img
+            src="loginpage.png"
+            alt="BizFlow Executive Boss Character Leaning on Card"
+            class="boss-character-img"
+            draggable="false"
+          />
+        </div>
+
+        <!-- Main Auth Card -->
+        <div class="auth-card" id="auth-card">
+
+          <!-- Card Ambient Glow -->
+          <div class="card-glow" aria-hidden="true"></div>
+
+          <!-- Card Header / Title -->
+          <div class="card-header">
+            <div class="card-brand-pill">
+              <span class="pill-dot"></span>
+              <span>Secure Access</span>
+            </div>
+            <h1 class="card-title" id="card-title">Welcome to BizFlow</h1>
+            <p class="card-subtitle" id="card-subtitle">One flow. One view. Better decisions.</p>
+          </div>
+
+          <!-- Mode Switcher Tabs -->
+          <div class="auth-tabs" role="tablist" aria-label="Authentication mode">
+            <div class="tab-slider" id="tab-slider"></div>
+            <button type="button" class="tab-btn active" id="tab-login" role="tab" aria-selected="true" aria-controls="form-login">
+              Sign In
+            </button>
+            <button type="button" class="tab-btn" id="tab-signup" role="tab" aria-selected="false" aria-controls="form-signup">
+              Create Account
+            </button>
+          </div>
+
+          <!-- ════════════════════════════════════════════
+               1. LOGIN FORM
+          ════════════════════════════════════════════ -->
+          <form class="auth-form active" id="form-login" novalidate>
+
+            <!-- Email Input -->
+            <div class="form-group">
+              <label for="login-email" class="form-label">Email Address</label>
+              <div class="input-wrap">
+                <span class="input-icon" aria-hidden="true">
+                  <svg viewBox="0 0 20 20" fill="none">
+                    <path d="M2.5 5.833A2.5 2.5 0 015 3.333h10a2.5 2.5 0 012.5 2.5v8.334a2.5 2.5 0 01-2.5 2.5H5a2.5 2.5 0 01-2.5-2.5V5.833z" stroke="currentColor" stroke-width="1.6"/>
+                    <path d="M17.5 5.833L10 11.25 2.5 5.833" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+                <input
+                  type="email"
+                  id="login-email"
+                  name="email"
+                  class="form-input"
+                  placeholder="name@company.com"
+                  required
+                  autocomplete="email"
+                />
+              </div>
+              <span class="input-error" id="login-email-error"></span>
+            </div>
+
+            <!-- Password Input -->
+            <div class="form-group">
+              <div class="label-row">
+                <label for="login-password" class="form-label">Password</label>
+                <a href="#" class="forgot-link" id="link-forgot">Forgot?</a>
+              </div>
+              <div class="input-wrap">
+                <span class="input-icon" aria-hidden="true">
+                  <svg viewBox="0 0 20 20" fill="none">
+                    <rect x="3.33" y="9.17" width="13.34" height="8.33" rx="2" stroke="currentColor" stroke-width="1.6"/>
+                    <path d="M5.83 9.17V5.83a4.17 4.17 0 118.34 0v3.34" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                  </svg>
+                </span>
+                <input
+                  type="password"
+                  id="login-password"
+                  name="password"
+                  class="form-input"
+                  placeholder="Enter your password"
+                  required
+                  autocomplete="current-password"
+                />
+                <button type="button" class="btn-eye" id="login-eye" aria-label="Toggle password visibility">
+                  <svg class="eye-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                    <circle cx="12" cy="12" r="3"/>
+                  </svg>
+                </button>
+              </div>
+              <span class="input-error" id="login-password-error"></span>
+            </div>
+
+            <!-- Remember me -->
+            <div class="form-options">
+              <label class="custom-checkbox">
+                <input type="checkbox" id="login-remember" checked />
+                <span class="checkmark"></span>
+                <span class="checkbox-label">Keep me signed in</span>
+              </label>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn-submit" id="btn-login-submit">
+              <span class="btn-submit-text">Sign In to BizFlow</span>
+              <span class="btn-submit-spinner" aria-hidden="true"></span>
+            </button>
+
+            <!-- Bottom Switch Prompt -->
+            <p class="form-switch-prompt">
+              Don't have an account yet?
+              <button type="button" class="link-switch" id="switch-to-signup">Create one free</button>
+            </p>
+
+          </form>
+
+          <!-- ════════════════════════════════════════════
+               2. SIGN UP FORM
+          ════════════════════════════════════════════ -->
+          <form class="auth-form" id="form-signup" novalidate>
+
+            <!-- Full Name -->
+            <div class="form-group">
+              <label for="signup-name" class="form-label">Full Name</label>
+              <div class="input-wrap">
+                <span class="input-icon" aria-hidden="true">
+                  <svg viewBox="0 0 20 20" fill="none">
+                    <path d="M10 10a4 4 0 100-8 4 4 0 000 8zM3 18a7 7 0 0114 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                  </svg>
+                </span>
+                <input
+                  type="text"
+                  id="signup-name"
+                  name="name"
+                  class="form-input"
+                  placeholder="Alex Morgan"
+                  required
+                  autocomplete="name"
+                />
+              </div>
+              <span class="input-error" id="signup-name-error"></span>
+            </div>
+
+            <!-- Business Name -->
+            <div class="form-group">
+              <label for="signup-business" class="form-label">Business / Company Name</label>
+              <div class="input-wrap">
+                <span class="input-icon" aria-hidden="true">
+                  <svg viewBox="0 0 20 20" fill="none">
+                    <rect x="3.33" y="5.83" width="13.34" height="11.67" rx="2" stroke="currentColor" stroke-width="1.6"/>
+                    <path d="M7.5 5.83V4.17a1.67 1.67 0 011.67-1.67h1.66a1.67 1.67 0 011.67 1.67v1.66" stroke="currentColor" stroke-width="1.6"/>
+                  </svg>
+                </span>
+                <input
+                  type="text"
+                  id="signup-business"
+                  name="business"
+                  class="form-input"
+                  placeholder="Morgan Retail & Co."
+                  required
+                />
+              </div>
+              <span class="input-error" id="signup-business-error"></span>
+            </div>
+
+            <!-- Work Email -->
+            <div class="form-group">
+              <label for="signup-email" class="form-label">Work Email Address</label>
+              <div class="input-wrap">
+                <span class="input-icon" aria-hidden="true">
+                  <svg viewBox="0 0 20 20" fill="none">
+                    <path d="M2.5 5.833A2.5 2.5 0 015 3.333h10a2.5 2.5 0 012.5 2.5v8.334a2.5 2.5 0 01-2.5 2.5H5a2.5 2.5 0 01-2.5-2.5V5.833z" stroke="currentColor" stroke-width="1.6"/>
+                    <path d="M17.5 5.833L10 11.25 2.5 5.833" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+                <input
+                  type="email"
+                  id="signup-email"
+                  name="email"
+                  class="form-input"
+                  placeholder="alex@company.com"
+                  required
+                  autocomplete="email"
+                />
+              </div>
+              <span class="input-error" id="signup-email-error"></span>
+            </div>
+
+            <!-- Password -->
+            <div class="form-group">
+              <label for="signup-password" class="form-label">Create Password</label>
+              <div class="input-wrap">
+                <span class="input-icon" aria-hidden="true">
+                  <svg viewBox="0 0 20 20" fill="none">
+                    <rect x="3.33" y="9.17" width="13.34" height="8.33" rx="2" stroke="currentColor" stroke-width="1.6"/>
+                    <path d="M5.83 9.17V5.83a4.17 4.17 0 118.34 0v3.34" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                  </svg>
+                </span>
+                <input
+                  type="password"
+                  id="signup-password"
+                  name="password"
+                  class="form-input"
+                  placeholder="At least 8 characters"
+                  required
+                  autocomplete="new-password"
+                />
+                <button type="button" class="btn-eye" id="signup-eye" aria-label="Toggle password visibility">
+                  <svg class="eye-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                    <circle cx="12" cy="12" r="3"/>
+                  </svg>
+                </button>
+              </div>
+              <!-- Password Strength Bar -->
+              <div class="strength-meter" id="strength-meter">
+                <div class="strength-bar"><div class="strength-fill" id="strength-fill"></div></div>
+                <span class="strength-label" id="strength-label">Password strength</span>
+              </div>
+              <span class="input-error" id="signup-password-error"></span>
+            </div>
+
+            <!-- Terms Agreement -->
+            <div class="form-options">
+              <label class="custom-checkbox">
+                <input type="checkbox" id="signup-terms" required />
+                <span class="checkmark"></span>
+                <span class="checkbox-label">
+                  I agree to the <a href="#" class="terms-link">Terms of Service</a> & <a href="#" class="terms-link">Privacy Policy</a>
+                </span>
+              </label>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn-submit" id="btn-signup-submit">
+              <span class="btn-submit-text">Create Free Account</span>
+              <span class="btn-submit-spinner" aria-hidden="true"></span>
+            </button>
+
+            <!-- Bottom Switch Prompt -->
+            <p class="form-switch-prompt">
+              Already have an account?
+              <button type="button" class="link-switch" id="switch-to-login">Sign in</button>
+            </p>
+
+          </form>
+
+        </div>
+
+      </div>
+    </main>
+
+  </div>
+
+  <script src="auth.js"></script>
+</body>
+
+</html>
