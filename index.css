@@ -665,3 +665,15 @@ body {
     margin-bottom: 1.3rem;
   }
 }
+.hero-container {
+  display: flex;          /* Aligns items horizontally */
+  align-items: center;    /* Aligns them vertically in the center */
+  justify-content: center;/* Centers the entire block on the screen */
+  gap: 40px;              /* Adds space between the photo and your new design */
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.main-character, .side-design {
+  flex: 1;                /* Gives both sides equal spacing/weight */
+}
