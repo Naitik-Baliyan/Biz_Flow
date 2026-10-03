@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BizFlow — Dashboard | Smart Business Operations</title>
+  <meta name="description" content="Manage invoicing, inventory, customer accounts, and GST compliance in one unified real-time dashboard." />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="dashboard.css" />
+</head>
+<body class="dashboard-body">
+
+  <!-- APP SHELL -->
+  <div class="app-layout">
+
+    <!-- ── 1. SIDEBAR NAVIGATION ── -->
+    <aside class="app-sidebar" id="app-sidebar">
+      <div class="sidebar-header">
+        <a href="index.html" class="brand-logo" title="Back to BizFlow Home">
+          <svg class="logo-icon" viewBox="0 0 28 28" fill="none">
+            <rect x="2" y="16" width="6" height="10" rx="2" fill="#00897B"/>
+            <rect x="11" y="9" width="6" height="17" rx="2" fill="#00BFA5"/>
+            <rect x="20" y="2" width="6" height="24" rx="2" fill="#0E1E38"/>
+          </svg>
+          <span class="logo-text">BizFlow</span>
+        </a>
+        <button type="button" class="sidebar-collapse-btn" id="sidebar-toggle" aria-label="Toggle Sidebar">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M15 18l-6-6 6-6" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Store / Branch Selector -->
+      <div class="store-badge-card">
+        <div class="store-avatar">AR</div>
+        <div class="store-details">
+          <span class="store-name" id="display-business-name">Apex Retail Solutions</span>
+          <span class="store-status"><span class="pulse-dot"></span> Live Synced</span>
+        </div>
+      </div>
+
+      <!-- Navigation Links -->
+      <nav class="sidebar-nav">
+        <div class="nav-section-label">COMMAND CENTER</div>
+        
+        <button type="button" class="nav-link active" data-tab="overview">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="7" height="7"></rect>
+            <rect x="14" y="3" width="7" height="7"></rect>
+            <rect x="14" y="14" width="7" height="7"></rect>
+            <rect x="3" y="14" width="7" height="7"></rect>
+          </svg>
+          <span>Overview</span>
+        </button>
+
+        <button type="button" class="nav-link" data-tab="invoices">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="16" y1="13" x2="8" y2="13"></line>
+            <line x1="16" y1="17" x2="8" y2="17"></line>
+            <polyline points="10 9 9 9 8 9"></polyline>
+          </svg>
+          <span>Invoices &amp; Billing</span>
+          <span class="nav-pill" id="badge-pending-invoices">4</span>
+        </button>
+
+        <button type="button" class="nav-link" data-tab="inventory">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+            <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+            <line x1="12" y1="22.08" x2="12" y2="12"></line>
+          </svg>
+          <span>Inventory Tracker</span>
+          <span class="nav-pill warning" id="badge-low-stock">3</span>
+        </button>
+
+        <button type="button" class="nav-link" data-tab="customers">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+            <circle cx="9" cy="7" r="4"></circle>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+          </svg>
+          <span>Customers &amp; CRM</span>
+        </button>
+
+        <button type="button" class="nav-link" data-tab="gst">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+          </svg>
+          <span>GST &amp; Compliance</span>
+          <span class="nav-pill info">GSTR-1</span>
+        </button>
+
+        <div class="nav-section-label">INTELLIGENCE</div>
+
+        <button type="button" class="nav-link nav-ai-trigger" id="sidebar-ai-trigger">
+          <span class="ai-sparkle-icon">✨</span>
+          <span>BizFlow AI Copilot</span>
+          <span class="nav-pill groq">Groq ⚡</span>
+        </button>
+      </nav>
+
+      <!-- Sidebar Footer Action -->
+      <div class="sidebar-bottom">
+        <button type="button" class="btn-sidebar-invoice" id="btn-quick-new-invoice">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+          <span>Create Invoice</span>
+        </button>
+
+        <div class="demo-mode-pill">
+          <span class="demo-indicator"></span>
+          <span>Demo Sandbox</span>
+          <button type="button" class="btn-reset-demo" id="btn-reset-demo-data" title="Reset all records to fresh demo defaults">Reset</button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ── 2. MAIN APP CONTENT WRAPPER ── -->
+    <div class="app-main-stage">
+
+      <!-- TOP APP HEADER -->
+      <header class="app-topbar">
+        <div class="topbar-left">
+          <button type="button" class="mobile-menu-btn" id="mobile-menu-toggle" aria-label="Open navigation menu">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+
+          <!-- Global Omnibar Search -->
+          <div class="omnibar-wrap">
+            <svg class="search-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8">
+              <circle cx="8.5" cy="8.5" r="5.5"></circle>
+              <line x1="12.5" y1="12.5" x2="17" y2="17"></line>
+            </svg>
+            <input
+              type="text"
+              id="global-search"
+              class="omnibar-input"
+              placeholder="Search invoices, products, clients... (Ctrl + K)"
+            />
+            <span class="kbd-badge">Ctrl K</span>
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <!-- Quick AI Assistant Toggle -->
+          <button type="button" class="btn-topbar-action btn-ai-pulse" id="topbar-ai-btn" title="Open BizFlow AI Assistant">
+            <span class="ai-sparkle">✨</span>
+            <span class="ai-btn-text">AI Copilot</span>
+          </button>
+
+          <!-- Notification Bell -->
+          <div class="notif-wrapper">
+            <button type="button" class="btn-icon-topbar" id="notif-bell-btn" aria-label="Notifications">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+              </svg>
+              <span class="notif-badge" id="notif-unread-count">2</span>
+            </button>
+
+            <!-- Notifications Dropdown -->
+            <div class="notif-dropdown" id="notif-dropdown">
+              <div class="notif-header">
+                <h6>Notifications</h6>
+                <button type="button" class="btn-clear-notifs" id="btn-clear-notifs">Mark all read</button>
+              </div>
+              <div class="notif-list" id="notif-list-container">
+                <!-- Dynamically populated from mockData -->
+              </div>
+            </div>
+          </div>
+
+          <!-- User Profile Dropdown -->
+          <div class="profile-wrapper">
+            <button type="button" class="profile-btn" id="user-profile-btn" aria-expanded="false">
+              <div class="user-avatar" id="header-user-avatar">AM</div>
+              <div class="user-meta">
+                <span class="user-name" id="header-user-name">Alex Morgan</span>
+                <span class="user-role" id="header-user-role">Store Owner</span>
+              </div>
+              <svg class="chevron-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M6 9l6 6 6-6"/>
+              </svg>
+            </button>
+
+            <!-- Profile Menu -->
+            <div class="profile-menu" id="profile-menu">
+              <div class="profile-menu-header">
+                <strong id="menu-user-name">Alex Morgan</strong>
+                <span id="menu-user-email">demo@bizflow.com</span>
+              </div>
+              <div class="profile-menu-divider"></div>
+              <a href="#" class="profile-menu-item" id="menu-item-store-settings">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                <span>Store Profile &amp; GSTIN</span>
+              </a>
+              <a href="#" class="profile-menu-item" id="menu-item-reset-data">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg>
+                <span>Reset Demo Sandbox</span>
+              </a>
+              <div class="profile-menu-divider"></div>
+              <button type="button" class="profile-menu-item text-danger" id="menu-btn-signout">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+                <span>Sign Out</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- SCROLLABLE DASHBOARD VIEWPORT -->
+      <main class="dashboard-viewport" id="dashboard-viewport">
+
+        <!-- ── TAB: OVERVIEW ── -->
+        <section class="dashboard-tab-panel active" id="tab-panel-overview">
+
+          <!-- Welcome Banner / Filter Bar -->
+          <div class="page-intro-row">
+            <div class="intro-headline">
+              <h1 class="page-title">Operational Overview</h1>
+              <p class="page-subtitle">Real-time pulses for sales, billing, inventory &amp; tax liabilities.</p>
+            </div>
+
+            <div class="intro-actions">
+              <div class="period-pill-group">
+                <button type="button" class="period-pill" data-period="today">Today</button>
+                <button type="button" class="period-pill" data-period="week">7 Days</button>
+                <button type="button" class="period-pill active" data-period="month">October 2026</button>
+              </div>
+
+              <button type="button" class="btn-action-primary" id="btn-hero-new-invoice">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                <span>New Invoice</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- ── 4 KEY EXECUTIVE METRIC CARDS ── -->
+          <div class="metrics-grid">
+
+            <!-- Metric 1: Monthly Revenue -->
+            <div class="metric-card" id="card-revenue">
+              <div class="metric-card-top">
+                <span class="metric-label">Monthly Gross Revenue</span>
+                <span class="metric-trend positive">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="18 15 12 9 6 15"></polyline></svg>
+                  <span>+14.8%</span>
+                </span>
+              </div>
+              <div class="metric-value" id="kpi-monthly-revenue">₹3,84,520</div>
+              <div class="metric-footer">
+                <span class="metric-subtext">38 closed orders this period</span>
+                <span class="metric-spark-dot teal"></span>
+              </div>
+            </div>
+
+            <!-- Metric 2: Receivables / Dues -->
+            <div class="metric-card" id="card-dues">
+              <div class="metric-card-top">
+                <span class="metric-label">Outstanding Receivables</span>
+                <span class="metric-badge-status warning" id="kpi-pending-count">4 Pending</span>
+              </div>
+              <div class="metric-value text-amber" id="kpi-outstanding-amount">₹68,400</div>
+              <div class="metric-footer">
+                <span class="metric-subtext">2 invoices overdue &gt; 10 days</span>
+                <button type="button" class="link-inline-action" id="btn-quick-remind-dues">Send Reminders →</button>
+              </div>
+            </div>
+
+            <!-- Metric 3: Inventory Valuation -->
+            <div class="metric-card" id="card-inventory">
+              <div class="metric-card-top">
+                <span class="metric-label">Inventory Valuation</span>
+                <span class="metric-badge-status danger" id="kpi-low-stock-count">3 Low Stock</span>
+              </div>
+              <div class="metric-value" id="kpi-inventory-valuation">₹12,45,000</div>
+              <div class="metric-footer">
+                <span class="metric-subtext">6 product lines tracked</span>
+                <button type="button" class="link-inline-action" id="btn-jump-inventory">Restock Items →</button>
+              </div>
+            </div>
+
+            <!-- Metric 4: Estimated GST -->
+            <div class="metric-card" id="card-gst">
+              <div class="metric-card-top">
+                <span class="metric-label">Net GST Due (Oct)</span>
+                <span class="metric-badge-status info">Due Oct 20</span>
+              </div>
+              <div class="metric-value text-indigo" id="kpi-gst-liability">₹34,600</div>
+              <div class="metric-footer">
+                <span class="metric-subtext">CGST + SGST (Input Credit: ₹18.4k)</span>
+                <span class="metric-spark-dot indigo"></span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- ── MIDDLE ROW: REVENUE TREND + BIZFLOW AI COPILOT ── -->
+          <div class="dashboard-mid-grid">
+
+            <!-- Chart Card: 7-Day Performance -->
+            <div class="content-card sales-chart-card">
+              <div class="card-head-row">
+                <div class="card-title-group">
+                  <h3 class="card-title">Weekly Revenue &amp; Cost Trajectory</h3>
+                  <p class="card-desc">Compare daily gross sales against direct inventory acquisition cost.</p>
+                </div>
+                <div class="chart-legend">
+                  <span class="legend-item"><span class="legend-swatch revenue"></span> Revenue</span>
+                  <span class="legend-item"><span class="legend-swatch cost"></span> Cost</span>
+                </div>
+              </div>
+
+              <!-- Bar Visualization Chart Container -->
+              <div class="chart-wrapper" id="sales-bar-chart">
+                <!-- Dynamically rendered via JS -->
+              </div>
+            </div>
+
+            <!-- AI Copilot Pulse Card (Groq Ready) -->
+            <div class="content-card ai-insights-card">
+              <div class="card-head-row">
+                <div class="card-title-group">
+                  <div class="ai-badge-row">
+                    <span class="ai-copilot-pill">✨ BizFlow Copilot</span>
+                    <span class="groq-tag">Groq Llama-3.3-70b</span>
+                  </div>
+                  <h3 class="card-title">Operational Intelligence</h3>
+                </div>
+              </div>
+
+              <div class="ai-insights-stream" id="ai-insights-stream">
+                <!-- Dynamically rendered suggestions -->
+              </div>
+
+              <!-- Instant AI Chat Input -->
+              <form class="ai-quick-query-form" id="ai-quick-form">
+                <input
+                  type="text"
+                  id="ai-quick-input"
+                  class="ai-quick-input"
+                  placeholder="Ask AI: 'Who owes money?', 'Reorder list'..."
+                  autocomplete="off"
+                />
+                <button type="submit" class="btn-ai-send" aria-label="Send Query">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                    <line x1="22" y1="2" x2="11" y2="13"></line>
+                    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                  </svg>
+                </button>
+              </form>
+            </div>
+
+          </div>
+
+          <!-- ── BOTTOM ROW: RECENT INVOICES + INVENTORY WATCHLIST ── -->
+          <div class="dashboard-tables-grid">
+
+            <!-- Left Table: Recent Invoices -->
+            <div class="content-card table-card">
+              <div class="card-head-row">
+                <div class="card-title-group">
+                  <h3 class="card-title">Recent Invoices</h3>
+                  <p class="card-desc">Click any invoice to preview or settle status.</p>
+                </div>
+                <button type="button" class="btn-secondary-sm" id="btn-view-all-invoices">View All</button>
+              </div>
+
+              <div class="table-responsive">
+                <table class="biz-table" id="table-recent-invoices">
+                  <thead>
+                    <tr>
+                      <th>Invoice ID</th>
+                      <th>Client / Company</th>
+                      <th>Date</th>
+                      <th>Total (INR)</th>
+                      <th>Status</th>
+                      <th class="text-right">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody id="invoices-tbody">
+                    <!-- Populated dynamically -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Right Table: Low Stock Watchlist -->
+            <div class="content-card table-card">
+              <div class="card-head-row">
+                <div class="card-title-group">
+                  <h3 class="card-title">Inventory Alerts</h3>
+                  <p class="card-desc">Stock items approaching minimum safety thresholds.</p>
+                </div>
+                <button type="button" class="btn-secondary-sm" id="btn-add-inventory-modal-trigger">+ Add Item</button>
+              </div>
+
+              <div class="inventory-watchlist" id="inventory-watchlist-container">
+                <!-- Populated dynamically -->
+              </div>
+            </div>
+
+          </div>
+
+        </section>
+
+      </main>
+
+    </div>
+
+  </div>
+
+  <!-- ── 3. CREATE INVOICE MODAL ── -->
+  <div class="modal-backdrop" id="modal-invoice" aria-hidden="true">
+    <div class="modal-box modal-lg">
+      <div class="modal-header">
+        <div>
+          <h3 class="modal-title">Create New Sales Invoice</h3>
+          <p class="modal-subtitle">Automatically computes 18% GST (CGST + SGST) and updates inventory.</p>
+        </div>
+        <button type="button" class="modal-close-btn" id="btn-close-invoice-modal">&times;</button>
+      </div>
+
+      <form id="form-create-invoice" class="modal-form">
+        <div class="form-row two-col">
+          <div class="form-group">
+            <label class="form-label" for="inv-customer">Customer / Business Name *</label>
+            <input type="text" id="inv-customer" class="form-control" placeholder="e.g. Skyline Media Pvt Ltd" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="inv-contact">Contact Phone / Email</label>
+            <input type="text" id="inv-contact" class="form-control" placeholder="e.g. +91 98201 55667" />
+          </div>
+        </div>
+
+        <div class="form-row three-col">
+          <div class="form-group">
+            <label class="form-label" for="inv-product-select">Select Product *</label>
+            <select id="inv-product-select" class="form-control" required>
+              <option value="">-- Choose inventory item --</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="inv-qty">Quantity *</label>
+            <input type="number" id="inv-qty" class="form-control" min="1" max="100" value="1" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="inv-unit-price">Unit Price (₹) *</label>
+            <input type="number" id="inv-unit-price" class="form-control" min="1" placeholder="4200" required />
+          </div>
+        </div>
+
+        <div class="form-row two-col">
+          <div class="form-group">
+            <label class="form-label" for="inv-payment-status">Initial Payment Status</label>
+            <select id="inv-payment-status" class="form-control">
+              <option value="Paid">Paid (Immediate Settlement)</option>
+              <option value="Pending" selected>Pending (Net 15 Days)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="inv-payment-method">Payment Mode</label>
+            <select id="inv-payment-method" class="form-control">
+              <option value="UPI">UPI (GooglePay / PhonePe / Paytm)</option>
+              <option value="NEFT">NEFT / Bank Transfer</option>
+              <option value="Credit Card">Credit / Corporate Card</option>
+              <option value="Cash">Cash</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Live Cost Breakdown Box -->
+        <div class="invoice-summary-box">
+          <div class="sum-row">
+            <span>Subtotal:</span>
+            <strong id="inv-calc-subtotal">₹0</strong>
+          </div>
+          <div class="sum-row">
+            <span>GST (18% Integrated / CGST+SGST):</span>
+            <strong id="inv-calc-gst">₹0</strong>
+          </div>
+          <div class="sum-row total">
+            <span>Grand Total:</span>
+            <strong id="inv-calc-total">₹0</strong>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" id="btn-cancel-invoice">Cancel</button>
+          <button type="submit" class="btn-action-primary" id="btn-submit-invoice">
+            <span>Generate &amp; Issue Invoice</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ── 4. ADD INVENTORY ITEM MODAL ── -->
+  <div class="modal-backdrop" id="modal-inventory" aria-hidden="true">
+    <div class="modal-box">
+      <div class="modal-header">
+        <div>
+          <h3 class="modal-title">Add New Inventory Item</h3>
+          <p class="modal-subtitle">Track real-time stock levels, cost, and reorder alarms.</p>
+        </div>
+        <button type="button" class="modal-close-btn" id="btn-close-inventory-modal">&times;</button>
+      </div>
+
+      <form id="form-add-product" class="modal-form">
+        <div class="form-group">
+          <label class="form-label" for="prod-name">Product / Item Name *</label>
+          <input type="text" id="prod-name" class="form-control" placeholder="e.g. Mechanical Gaming Keyboard RGB" required />
+        </div>
+
+        <div class="form-row two-col">
+          <div class="form-group">
+            <label class="form-label" for="prod-category">Category</label>
+            <input type="text" id="prod-category" class="form-control" placeholder="e.g. Peripherals" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="prod-supplier">Supplier / Vendor</label>
+            <input type="text" id="prod-supplier" class="form-control" placeholder="e.g. DigiTech Importers" required />
+          </div>
+        </div>
+
+        <div class="form-row three-col">
+          <div class="form-group">
+            <label class="form-label" for="prod-stock">Current Stock *</label>
+            <input type="number" id="prod-stock" class="form-control" min="0" value="10" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="prod-min-stock">Min Safety Threshold *</label>
+            <input type="number" id="prod-min-stock" class="form-control" min="1" value="5" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="prod-cost">Cost Price (₹) *</label>
+            <input type="number" id="prod-cost" class="form-control" min="1" placeholder="1500" required />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="prod-selling-price">Selling Price (₹) *</label>
+          <input type="number" id="prod-selling-price" class="form-control" min="1" placeholder="2400" required />
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" id="btn-cancel-inventory">Cancel</button>
+          <button type="submit" class="btn-action-primary">
+            <span>Add to Stock Catalog</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ── 5. AI COPILOT INTERACTIVE DRAWER ── -->
+  <div class="ai-drawer" id="ai-drawer" aria-hidden="true">
+    <div class="ai-drawer-header">
+      <div class="ai-drawer-title">
+        <span class="ai-star">✨</span>
+        <div>
+          <h4>BizFlow AI Copilot</h4>
+          <span class="ai-status-sub">Powered by Groq Cloud • Llama 3.3 70B</span>
+        </div>
+      </div>
+      <button type="button" class="ai-close-btn" id="btn-close-ai-drawer">&times;</button>
+    </div>
+
+    <div class="ai-drawer-body" id="ai-chat-messages">
+      <div class="ai-chat-bubble assistant">
+        <p>👋 Hello Alex! I'm your BizFlow Copilot. I analyze your sales, inventory, unpaid invoices, and tax compliance in real time.</p>
+        <p>Here are quick actions you can try right now:</p>
+        <div class="ai-quick-chips">
+          <button type="button" class="ai-chip" data-prompt="Summarize today's cash flow and upcoming dues">📊 Cash Flow Summary</button>
+          <button type="button" class="ai-chip" data-prompt="Which items are at risk of running out of stock?">⚠️ Low Stock Audit</button>
+          <button type="button" class="ai-chip" data-prompt="Draft a polite WhatsApp reminder for overdue invoices">💬 Payment Reminders</button>
+          <button type="button" class="ai-chip" data-prompt="How much GST input credit is available for October?">🏛️ GST Breakdown</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="ai-drawer-footer">
+      <form id="ai-drawer-form" class="ai-drawer-input-row">
+        <input
+          type="text"
+          id="ai-drawer-input"
+          class="ai-drawer-input"
+          placeholder="Ask BizFlow AI anything..."
+          autocomplete="off"
+        />
+        <button type="submit" class="btn-drawer-send">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <line x1="22" y1="2" x2="11" y2="13"></line>
+            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+          </svg>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Scripts -->
+  <script src="mockData.js"></script>
+  <script src="dashboard.js"></script>
+</body>
+</html>

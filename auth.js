@@ -163,15 +163,22 @@
         return;
       }
 
-      // Simulate authentication request
+      // Authenticate & open Dashboard
       submitBtn.classList.add('loading');
       submitBtn.disabled = true;
 
+      startSession({
+        name: email.value.split('@')[0].replace('.', ' ').replace(/^\w/, c => c.toUpperCase()),
+        email: email.value,
+        business: 'Apex Retail Solutions',
+        role: 'Manager',
+        isDemo: email.value.includes('demo')
+      });
+
       setTimeout(() => {
         submitBtn.classList.remove('loading');
-        submitBtn.disabled = false;
-        alert(`Welcome back to BizFlow! Signed in as ${email.value}`);
-      }, 1000);
+        window.location.href = 'dashboard.html';
+      }, 650);
     });
   }
 
@@ -206,15 +213,79 @@
         return;
       }
 
-      // Simulate signup request
+      // Register & open Dashboard
       submitBtn.classList.add('loading');
       submitBtn.disabled = true;
 
+      startSession({
+        name: name.value,
+        email: email.value,
+        business: business.value,
+        role: 'Founder',
+        isDemo: false
+      });
+
       setTimeout(() => {
         submitBtn.classList.remove('loading');
-        submitBtn.disabled = false;
-        alert(`Account created successfully for ${name.value} at ${business.value}!`);
-      }, 1200);
+        window.location.href = 'dashboard.html';
+      }, 750);
+    });
+  }
+
+
+  // ── 5. Quick Demo Account Login ──────────────────────────────────
+  const btnQuickDemo = document.getElementById('btn-quick-demo');
+
+  function startSession(userData) {
+    localStorage.setItem('bizflow_session', JSON.stringify({
+      name: userData.name || 'Alex Morgan',
+      email: userData.email || 'demo@bizflow.com',
+      business: userData.business || 'Apex Retail Solutions',
+      role: userData.role || 'Business Owner',
+      gstin: userData.gstin || '27AABCU9603R1ZM',
+      currency: '₹',
+      avatar: (userData.name ? userData.name.split(' ').map(n => n[0]).join('') : 'AM').toUpperCase(),
+      loggedInAt: new Date().toISOString(),
+      isDemo: Boolean(userData.isDemo)
+    }));
+  }
+
+  if (btnQuickDemo) {
+    btnQuickDemo.addEventListener('click', () => {
+      const emailInput = document.getElementById('login-email');
+      const pwdInput = document.getElementById('login-password');
+      const submitBtn = document.getElementById('btn-login-submit');
+
+      // Autofill for visual delight
+      if (emailInput) emailInput.value = 'demo@bizflow.com';
+      if (pwdInput) pwdInput.value = 'demo1234';
+
+      btnQuickDemo.style.pointerEvents = 'none';
+      btnQuickDemo.innerHTML = `
+        <span class="demo-sparkle" style="color: #00897B;">✓</span>
+        <div class="demo-info">
+          <span class="demo-action" style="color: #00695C;">Demo Account Authenticated!</span>
+          <span class="demo-meta">Loading Apex Retail workspace...</span>
+        </div>
+      `;
+
+      startSession({
+        name: 'Alex Morgan',
+        email: 'demo@bizflow.com',
+        business: 'Apex Retail Solutions',
+        role: 'Store Owner',
+        gstin: '27AABCU9603R1ZM',
+        isDemo: true
+      });
+
+      if (submitBtn) {
+        submitBtn.classList.add('loading');
+        submitBtn.disabled = true;
+      }
+
+      setTimeout(() => {
+        window.location.href = 'dashboard.html';
+      }, 700);
     });
   }
 
